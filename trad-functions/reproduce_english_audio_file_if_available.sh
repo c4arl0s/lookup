@@ -7,7 +7,13 @@ reproduce_english_audio_file_if_available() {
     reproduce_audio ${WORD}
   else
     printf "\n${RED}Audio file does not exist\n"
-    download_word_audio -w ${WORD}
+    if ! download_word_audio -w ${WORD}; then
+      if ! download_audio_from_google ${WORD}; then
+        if ! download_audio_from_wiktionary ${WORD}; then
+          download_audio_from_google_tts ${WORD}
+        fi
+      fi
+    fi
     convert_mp3_to_wav ${WORD}
     reproduce_audio ${WORD}
   fi

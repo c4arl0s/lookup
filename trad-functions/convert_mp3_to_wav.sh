@@ -37,8 +37,12 @@ convert_mp3_to_wav() {
 
   # Check if input file exists
   if [[ ! -f "${input_file}" ]]; then
-    echo "Error: Input file ${input_file} does not exist" >&2
-    return 1
+    if [[ -f "${output_file}" ]]; then
+      # The WAV file already exists natively (e.g., from mac TTS), no conversion needed
+      return 0
+    else
+      return 1
+    fi
   fi
 
   # Check if ffmpeg is installed
