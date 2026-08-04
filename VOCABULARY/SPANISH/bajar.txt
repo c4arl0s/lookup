@@ -1,1 +1,2 @@
 bajar : get-down :  :  :  :  : 
+bajar:get-off:::::
