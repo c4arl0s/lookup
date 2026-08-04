@@ -56,8 +56,12 @@ download_word_audio()
   FILE_NAME="${WORD}.mp3"
   
   echo "Downloading pronunciation for \"$WORD\"..."
-  curl -L -o "$FILE_NAME" "$AUDIO_URL"
-  
-  echo "Saved to $FILE_NAME"
-  mv $FILE_NAME $AUDIO_DIRECTORY_PATH
+  if curl -sSfL -o "$FILE_NAME" "$AUDIO_URL"; then
+    echo "Saved to $FILE_NAME"
+    mv "$FILE_NAME" "$AUDIO_DIRECTORY_PATH/"
+  else
+    echo "Failed to download audio for \"$WORD\""
+    rm -f "$FILE_NAME"
+    return 1
+  fi
 }
