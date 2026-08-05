@@ -16,8 +16,8 @@ get_spanish_fields() {
   ROW=$2
   FILE_NAME="${SPANISH_DIRECTORY_PATH}/${WORD}.txt"
 
-  INGLES=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 1 -d ":"`
-  ESPANOL=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 2 -d ":"`
+  ESPANOL=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 1 -d ":"`
+  INGLES=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 2 -d ":"`
   EXTRA=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 3 -d ":"`
   P=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 4 -d ":"`
   PP=`echo "$(<${FILE_NAME})" | tail -${ROW} | cut -f 5 -d ":"`
