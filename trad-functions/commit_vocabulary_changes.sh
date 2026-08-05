@@ -13,7 +13,12 @@ commit_vocabulary_changes() {
     # Commit the changes with a standardized prefix
     git -C "${REPO_DIR}" commit -m "data(vocab): add '${WORD}'" --quiet
     
-    # Push the changes asynchronously in the background so it doesn't block the user
-    (git -C "${REPO_DIR}" push origin master --quiet >/dev/null 2>&1 &)
+    # Get the current hour in Central Time (00-23)
+    local CURRENT_HOUR=$(TZ="America/Chicago" date +%H)
+    
+    # Only push if it is 6 PM (18:00) or later in Central Time
+    if [ "$CURRENT_HOUR" -ge 18 ]; then
+      (git -C "${REPO_DIR}" push origin master --quiet >/dev/null 2>&1 &)
+    fi
   fi
 }
