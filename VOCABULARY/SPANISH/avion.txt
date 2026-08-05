@@ -1,1 +1,2 @@
 avion:plane:::::
+avion:airplane:::::
