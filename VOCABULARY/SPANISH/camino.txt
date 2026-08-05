@@ -2,3 +2,4 @@ camino : way :  :  :  :  :
 camino : waterway :  :  :  :  : 
 camino : road :  :  :  :  : 
 camino : path :  :  :  :  : 
+camino:pathway:::::

@@ -1,1 +1,2 @@
 damage:dañar:::::
+damage:daño:::::
