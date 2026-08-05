@@ -31,6 +31,7 @@ process_english_word() {
   reproduce_english_audio_file_if_available ${word}
   display_english_translation ${word}
   last_word_found=${word}
+  commit_vocabulary_changes ${word}
 }
 
 process_spanish_word() {
@@ -42,6 +43,7 @@ process_spanish_word() {
   clean_english_word=$(echo "${INGLES}" | xargs)
   reproduce_english_audio_file_if_available ${clean_english_word}
   last_word_found=${clean_english_word}
+  commit_vocabulary_changes ${clean_english_word}
 }
 
 process_unknown_word() {
@@ -51,6 +53,7 @@ process_unknown_word() {
   reproduce_english_audio_file_if_available ${ingles} 
   display_option_to_add_new_word
   display_menu
+  commit_vocabulary_changes ${word}
 }
 
 process_empty_word() {
