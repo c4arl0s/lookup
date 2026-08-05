@@ -29,18 +29,9 @@ download_word_audio()
     esac
     done
   
-  echo "Using dictionaryapi API to download $1"
+  # Fetch JSON data silently
   API_URL="https://api.dictionaryapi.dev/api/v2/entries/en/${WORD}"
-  
-  if curl -sSf "$API_URL"; then
-    echo "Success: Curl returned 0"
-  else
-    echo "Failure: Curl returned $?"
-    return 1 
-  fi
-  
-  # Fetch JSON data
-  JSON=$(curl -sSf "$API_URL")
+  JSON=$(curl -sf "$API_URL")
   
   # Extract the first non‑empty audio URL using jq
   AUDIO_URL=$(echo "$JSON" |
@@ -49,18 +40,16 @@ download_word_audio()
     head -n1)
   
   if [[ -z "$AUDIO_URL" ]]; then
-    echo "No audio pronunciation found for \"$WORD\""
     return 1
   fi
   
-  FILE_NAME="${WORD}.mp3"
+  local FILE_NAME="${WORD}.mp3"
   
-  echo "Downloading pronunciation for \"$WORD\"..."
-  if curl -sSfL -o "$FILE_NAME" "$AUDIO_URL"; then
-    echo "Saved to $FILE_NAME"
+  printf "\n${YELLOW}Downloading audio from DictionaryAPI...${NC}\n"
+  HTTP_CODE=$(curl -# -L -w "%{http_code}" -o "$FILE_NAME" "$AUDIO_URL")
+  if [[ "$HTTP_CODE" == "200" ]]; then
     mv "$FILE_NAME" "$AUDIO_DIRECTORY_PATH/"
   else
-    echo "Failed to download audio for \"$WORD\""
     rm -f "$FILE_NAME"
     return 1
   fi

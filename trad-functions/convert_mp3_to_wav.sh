@@ -51,26 +51,20 @@ convert_mp3_to_wav() {
     return 1
   fi
 
-  echo "Converting ${word}.mp3 to WAV format..."
-
   # Convert MP3 to WAV
   if ! ffmpeg -i "${input_file}" "${output_file}" >/dev/null 2>&1; then
-    echo "Error: Failed to convert ${word}.mp3 to WAV" >&2
     ((error_count++))
   fi
 
   # Verify output file was created
   if [[ ! -f "${output_file}" ]]; then
-    echo "Error: Output file ${output_file} was not created" >&2
     ((error_count++))
   fi
 
   # Report result
   if [[ ${error_count} -eq 0 ]]; then
-    echo -e "${GREEN}Successfully converted ${word}.mp3 to WAV format${NC}"
     return 0
   else
-    echo -e "${RED}Conversion failed with ${error_count} errors${NC}"
     return 1
   fi
 }

@@ -3,14 +3,13 @@
 download_audio_from_google()
 {
   WORD=$1
-  printf "\n${YELLOW}Trying Downloading from google"
   URL="https://ssl.gstatic.com/dictionary/static/sounds/de/0"
-  if wget -q --spider ${URL}/${WORD}.mp3 && wget -q -c ${URL}/${WORD}.mp3 -O ${AUDIO_DIRECTORY_PATH}/${WORD}.mp3 
-  then
-    printf "\n${GREEN}downloading mp3 file ...\n"
+  printf "\n${YELLOW}Downloading audio from Google Dictionary...${NC}\n"
+  HTTP_CODE=$(curl -# -L -w "%{http_code}" -o "${AUDIO_DIRECTORY_PATH}/${WORD}.mp3" "${URL}/${WORD}.mp3")
+  if [[ "$HTTP_CODE" == "200" ]]; then
     return 0
-  else 
-    printf "\n${RED}URL is down, try other mean\n"
+  else
+    rm -f "${AUDIO_DIRECTORY_PATH}/${WORD}.mp3"
     return 1
   fi
 }
