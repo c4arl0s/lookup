@@ -1,0 +1,1 @@
+corrected:corregido:::::it passes your corrected fields into the add_word command!
