@@ -1,6 +1,13 @@
 # lookup
 
-Interactive command-line tools for looking up and maintaining a personal English–Spanish vocabulary stored as plain text files. The project grew out of a simple habit: when you needed a word, you looked it up and saved it in a `.txt` file; over time those files became the local “database” the scripts search. If a word is missing, the tools can fall back to external translation (for example via the `trans` CLI).
+A command-line tool for translating English and Spanish words, managing a local vocabulary database, and automatically fetching and playing audio pronunciations. The project grew out of a simple habit: when you needed a word, you looked it up and saved it in a `.txt` file; over time those files became the local “database” the scripts search. If a word is missing, the tools can fall back to external translation (for example via the `trans` CLI).
+
+## Key Features
+
+- **Local Vocabulary Database**: Look up words and maintain your own personal English-Spanish dictionary stored purely as `.txt` files.
+- **Audio Pronunciations**: Automatically downloads and plays audio pronunciations for English words. Uses an intelligent API fallback sequence (DictionaryAPI → Google Dictionary → Wiktionary → Google TTS) to ensure audio is always found, complete with clean download progress bars.
+- **Interactive Editing**: When adding a new word, interactively correct the English and Spanish fields directly in the terminal before committing them to the database.
+- **Automatic Git Backups**: The tool automatically creates commits in the background to version control your growing vocabulary without interrupting your workflow.
 
 ![](https://github.com/carlos-santiago-2017/DictEnEsScript/blob/master/1.gif)
 
