@@ -1,1 +1,2 @@
 etiqueta:label:::::
+etiqueta:tag:::::
